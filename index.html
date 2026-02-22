@@ -1,1 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Find the Winner Spot</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, Arial, sans-serif; background: #111; color: #fff; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .card { background: #1a1a1a; border-radius: 14px; padding: 14px; }
+    .hint { font-size: 15px; line-height: 1.35; opacity: 0.9; }
+    .imgbox { position: relative; margin-top: 12px; border-radius: 12px; overflow: hidden; }
+    img { width: 100%; height: auto; display: block; }
 
+    /* Invisible winner hotspot (finger-friendly) */
+    .hotspot {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      left: 62%;   /* <-- CHANGE THIS (horizontal) */
+      top: 48%;    /* <-- CHANGE THIS (vertical) */
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0); /* invisible */
+    }
+
+    /* Optional: uncomment to see the hotspot while you’re testing */
+    /* .hotspot { background: rgba(0,255,0,0.25); outline: 2px solid rgba(0,255,0,0.7); } */
+
+    .footer { margin-top: 10px; font-size: 13px; opacity: 0.75; }
+    button { border: 0; border-radius: 10px; padding: 10px 12px; font-size: 15px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hint">
+        <strong>Challenge:</strong> Tap around the image to find the hidden winner spot.<br>
+        When you hit it, you’ll see <strong>WINNER</strong> — screenshot it and send it to me immediately.
+      </div>
+
+      <div class="imgbox">
+        <img src="puzzle.jpg" alt="Puzzle image" />
+        <div class="hotspot" id="hotspot" aria-label="winner spot"></div>
+      </div>
+
+      <div class="footer">
+        One prize. First valid screenshot timestamp wins.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hotspot = document.getElementById("hotspot");
+
+    hotspot.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      alert("🎉 WINNER! 🎉\n\nScreenshot this screen and send it to me NOW.\nFirst timestamp wins.");
+    });
+
+    // Optional: If they tap anywhere else, do nothing (less annoying).
+    // If you want a “try again” message, uncomment below:
+
+    // document.querySelector(".imgbox").addEventListener("click", () => {
+    //   alert("Not it — keep looking 👀");
+    // });
+  </script>
+</body>
+</html>
